@@ -17,9 +17,7 @@ class PokemonListViewController: UITableViewController {
            let destination = segue.destination as? PokemonDetailViewController,
            let cell = sender as? UITableViewCell,
            let indexPath = tableView.indexPath(for: cell) {
-//            let pokemon = Pokemon.testData[indexPath.row]
             let pokemon = PokemonDatabase.shared.pokemonList[indexPath.row]
-            print("preparing")
             destination.configure(with: pokemon)
         }
     }
@@ -27,7 +25,6 @@ class PokemonListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         PokemonDatabase.shared.pokemonList = PokemonDatabase.shared.getAllPokemon()
-        print("view loaded")
         pokemonListDataSource = PokemonListDataSource()
         tableView.dataSource = pokemonListDataSource
     }

@@ -29,8 +29,6 @@ class PokemonListCell: UITableViewCell {
 
     func configure(title: String, imageName: String) {
         titleLabel.text = title.capitalized
-        
-        print("image name: \(imageName)")
         imageSmall.image = UIImage(named: imageName)
     }
 }
