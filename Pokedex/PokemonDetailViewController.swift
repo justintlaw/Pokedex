@@ -13,6 +13,9 @@ class PokemonDetailViewController: UIViewController {
 
     // MARK: Outlets
     
+    // scroll view outlet
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     // header outlets
     @IBOutlet weak var pokemonName: UILabel!
     @IBOutlet weak var pokemonHeight: UILabel!
