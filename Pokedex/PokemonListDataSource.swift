@@ -15,7 +15,8 @@ extension PokemonListDataSource: UITableViewDataSource {
     static let pokemonListCellIdentifier = "PokemonListCell"
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PokemonDatabase.shared.pokemonList.count
+//        return PokemonDatabase.shared.pokemonList.count
+        return PokemonDatabase.shared.filteredPokemonList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -23,7 +24,8 @@ extension PokemonListDataSource: UITableViewDataSource {
             fatalError("Unable to dequeue PokemonCell")
         }
 
-        let pokemon =  PokemonDatabase.shared.pokemonList[indexPath.row]
+//        let pokemon =  PokemonDatabase.shared.pokemonList[indexPath.row]
+        let pokemon = PokemonDatabase.shared.filteredPokemonList[indexPath.row]
 
         cell.configure(title: pokemon.name, imageName: pokemon.img_sprite)
         
