@@ -8,6 +8,8 @@
 import UIKit
 
 class PokemonDetailViewController: UIViewController {
+    
+    static let showMovesSegueIdentifier = "ShowPokemonMovesSegue"
 
     // MARK: Outlets
     
@@ -35,6 +37,21 @@ class PokemonDetailViewController: UIViewController {
         self.pokemon = pokemon
         self.pokemonMoveList = PokemonDatabase.shared.getMovesForPokemon(id: pokemon.id)
         self.pokemonTypeList = PokemonDatabase.shared.getTypesForPokemon(id: pokemon.id)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == Self.showDetailSegueIdentifier,
+//           let destination = segue.destination as? PokemonDetailViewController,
+//           let cell = sender as? UITableViewCell,
+//           let indexPath = tableView.indexPath(for: cell) {
+//            let pokemon = PokemonDatabase.shared.pokemonList[indexPath.row]
+//            destination.configure(with: pokemon)
+//        }
+        if segue.identifier == Self.showMovesSegueIdentifier,
+           ((sender as? UIButton) != nil),
+           let destination = segue.destination as? MoveListViewController {
+            destination.configure(with: pokemonMoveList)
+        }
     }
     
     override func viewDidLoad() {
@@ -91,55 +108,3 @@ class PokemonDetailViewController: UIViewController {
         }
     }
 }
-
-//
-//  ReminderDetailViewController.swift
-//  Today
-//
-//  Created by Justin on 12/16/21.
-//
-
-//import UIKit
-//
-//class ReminderDetailViewController: UITableViewController {
-//    private var reminder: Reminder?
-//    private var dataSource: UITableViewDataSource?
-//
-//    func configure(with reminder: Reminder) {
-//        self.reminder = reminder
-//    }
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        setEditing(false, animated: false)
-//        navigationItem.setRightBarButton(editButtonItem, animated: false)
-//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: ReminderDetailEditDataSource.dateLabelCellIdentifer)
-//    }
-//
-//    override func setEditing(_ editing: Bool, animated: Bool) {
-//        super.setEditing(editing, animated: animated)
-//
-//        guard let reminder = reminder else {
-//            fatalError("No reminder found for detail view")
-//        }
-//
-//        if editing {
-//            dataSource = ReminderDetailEditDataSource(reminder: reminder)
-//            navigationItem.title = NSLocalizedString("Edit Reminder", comment: "edit reminder nav title")
-//            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTrigger))
-//        } else {
-//            dataSource = ReminderDetailViewDataSource(reminder: reminder)
-//            navigationItem.title = NSLocalizedString("View Reminder", comment: "view reminder nav title")
-//            navigationItem.leftBarButtonItem = nil
-//            editButtonItem.isEnabled = true
-//        }
-//
-//        tableView.dataSource = dataSource
-//        tableView.reloadData()
-//    }
-//
-//    @objc
-//    func cancelButtonTrigger() {
-//        setEditing(false, animated: true)
-//    }
-//}

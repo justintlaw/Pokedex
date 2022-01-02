@@ -19,7 +19,9 @@ class PokemonDatabase {
     // MARK: Properties
     var db: OpaquePointer?
     var pokemonList = [Pokemon]()
+    var moveList = [Move]()
     var filteredPokemonList = [Pokemon]()
+    var filteredMoveList = [Move]()
 
     // MARK: Singleton
     static let shared = PokemonDatabase()

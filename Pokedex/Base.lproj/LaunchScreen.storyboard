@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -11,15 +13,54 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bulbasaur-full" translatesAutoresizingMaskIntoConstraints="NO" id="4vr-bG-dXj">
+                                <rect key="frame" x="53" y="355" width="308" height="186"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="4vr-bG-dXj" secondAttribute="height" multiplier="154:93" id="UQM-FD-az7"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5k-Vv-QJz">
+                                <rect key="frame" x="165.5" y="841" width="83" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokédex" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCg-Pn-ipY">
+                                <rect key="frame" x="115.5" y="244" width="183" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="4vr-bG-dXj" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6sY-By-CZC"/>
+                            <constraint firstItem="4vr-bG-dXj" firstAttribute="top" secondItem="gCg-Pn-ipY" secondAttribute="bottom" constant="51" id="CNt-Z9-KWC"/>
+                            <constraint firstItem="gCg-Pn-ipY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="115.55888223552893" id="Nt4-LT-2cZ"/>
+                            <constraint firstItem="gCg-Pn-ipY" firstAttribute="centerX" secondItem="4vr-bG-dXj" secondAttribute="centerX" id="c6A-rj-zPh"/>
+                            <constraint firstItem="4vr-bG-dXj" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="jY3-ju-nT5"/>
+                            <constraint firstItem="4vr-bG-dXj" firstAttribute="centerX" secondItem="E5k-Vv-QJz" secondAttribute="centerX" id="kWW-Yp-mgz"/>
+                            <constraint firstItem="4vr-bG-dXj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="53" id="tWo-OE-N18"/>
+                            <constraint firstItem="E5k-Vv-QJz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="797" id="xHP-4n-9Iq"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="pokemonHeaderImage" destination="4vr-bG-dXj" id="BYR-8l-e3z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bulbasaur-full" width="475" height="475"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

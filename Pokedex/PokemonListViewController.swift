@@ -13,6 +13,10 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate, UIS
     static let showDetailSegueIdentifier = "ShowPokemonDetailSegue"
     
     let searchController = UISearchController()
+
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        searchController.isActive = true
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Self.showDetailSegueIdentifier,
@@ -32,9 +36,12 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate, UIS
         definesPresentationContext = true
         
         navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = true
-        searchController.searchBar.scopeButtonTitles = ["All", "Some", "None"]
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.searchBar.scopeButtonTitles = ["Number", "Name", "Type"]
         searchController.searchBar.delegate = self
+        
+        searchController.searchBar.showsBookmarkButton = true
+        searchController.searchBar.setImage(UIImage(systemName: "arrow.up.arrow.down"), for: .bookmark, state: .normal)
     }
     
     override func viewDidLoad() {
@@ -47,6 +54,12 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate, UIS
     }
     
     func updateSearchResults(for searchController: UISearchController) {
+        if searchController.isActive {
+            searchController.searchBar.showsBookmarkButton = false
+        } else {
+            searchController.searchBar.showsBookmarkButton = true
+        }
+
         let searchBar = searchController.searchBar
         let scopeButton = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
         let searchText = searchBar.text!
@@ -54,7 +67,7 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate, UIS
         filterForSearchTextAndScopeButton(searchText, scopeButton)
     }
     
-    func filterForSearchTextAndScopeButton(_ searchText: String, _ scopeButton: String = "All") {
+    func filterForSearchTextAndScopeButton(_ searchText: String, _ scopeButton: String = "Number") {
         PokemonDatabase.shared.filteredPokemonList = PokemonDatabase.shared.pokemonList.filter { pokemon in
 //            let scopeMatch = (scopeButton == "All" || pokemon.name == scopeButton)
             if (searchController.searchBar.text != "") {
@@ -67,7 +80,26 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate, UIS
 //                return scopeMatch
 //            }
             else {
-                return false
+                return true
+            }
+        }
+        
+        switch scopeButton {
+        case "Number":
+            PokemonDatabase.shared.filteredPokemonList = PokemonDatabase.shared.filteredPokemonList.sorted() {
+                $0.id < $1.id
+            }
+        case "Name":
+            PokemonDatabase.shared.filteredPokemonList = PokemonDatabase.shared.filteredPokemonList.sorted() {
+                $0.name < $1.name
+            }
+        case "Type":
+            PokemonDatabase.shared.filteredPokemonList = PokemonDatabase.shared.filteredPokemonList.sorted() {
+                PokemonDatabase.shared.getTypesForPokemon(id: $0.id)[0].name < PokemonDatabase.shared.getTypesForPokemon(id: $1.id)[0].name
+            }
+        default:
+            PokemonDatabase.shared.filteredPokemonList = PokemonDatabase.shared.filteredPokemonList.sorted() {
+                $0.id < $1.id
             }
         }
         
