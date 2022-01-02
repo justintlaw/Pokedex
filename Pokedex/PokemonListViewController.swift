@@ -23,7 +23,7 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate, UIS
            let destination = segue.destination as? PokemonDetailViewController,
            let cell = sender as? UITableViewCell,
            let indexPath = tableView.indexPath(for: cell) {
-            let pokemon = PokemonDatabase.shared.pokemonList[indexPath.row]
+            let pokemon = PokemonDatabase.shared.filteredPokemonList[indexPath.row]
             destination.configure(with: pokemon)
         }
     }
@@ -69,17 +69,11 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate, UIS
     
     func filterForSearchTextAndScopeButton(_ searchText: String, _ scopeButton: String = "Number") {
         PokemonDatabase.shared.filteredPokemonList = PokemonDatabase.shared.pokemonList.filter { pokemon in
-//            let scopeMatch = (scopeButton == "All" || pokemon.name == scopeButton)
             if (searchController.searchBar.text != "") {
                 let searchTextMatch = pokemon.name.lowercased().contains(searchText.lowercased())
-                
-//                return scopeMatch && searchTextMatch
+
                 return searchTextMatch
-            }
-//            else {
-//                return scopeMatch
-//            }
-            else {
+            } else {
                 return true
             }
         }
