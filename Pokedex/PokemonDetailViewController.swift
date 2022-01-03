@@ -13,9 +13,6 @@ class PokemonDetailViewController: UIViewController {
 
     // MARK: Outlets
     
-    // scroll view outlet
-    @IBOutlet weak var scrollView: UIScrollView!
-    
     // header outlets
     @IBOutlet weak var pokemonName: UILabel!
     @IBOutlet weak var pokemonHeight: UILabel!
@@ -43,13 +40,6 @@ class PokemonDetailViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == Self.showDetailSegueIdentifier,
-//           let destination = segue.destination as? PokemonDetailViewController,
-//           let cell = sender as? UITableViewCell,
-//           let indexPath = tableView.indexPath(for: cell) {
-//            let pokemon = PokemonDatabase.shared.pokemonList[indexPath.row]
-//            destination.configure(with: pokemon)
-//        }
         if segue.identifier == Self.showMovesSegueIdentifier,
            ((sender as? UIButton) != nil),
            let destination = segue.destination as? MoveListViewController {

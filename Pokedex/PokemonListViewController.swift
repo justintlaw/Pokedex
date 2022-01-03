@@ -28,6 +28,7 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate, UIS
         }
     }
     
+    // setup the search controller
     func initSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -53,6 +54,7 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate, UIS
         initSearchController()
     }
     
+    // respond to updates to search bar (user input)
     func updateSearchResults(for searchController: UISearchController) {
         if searchController.isActive {
             searchController.searchBar.showsBookmarkButton = false
@@ -67,6 +69,7 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate, UIS
         filterForSearchTextAndScopeButton(searchText, scopeButton)
     }
     
+    // filter based on text in search bar and sort options
     func filterForSearchTextAndScopeButton(_ searchText: String, _ scopeButton: String = "Number") {
         PokemonDatabase.shared.filteredPokemonList = PokemonDatabase.shared.pokemonList.filter { pokemon in
             if (searchController.searchBar.text != "") {
